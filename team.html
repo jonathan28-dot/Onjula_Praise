@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon | Onjula Praise · Queen of Seben</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- global styles (exactly as original) ---------- */
+        :root {
+            --primary: #d44c68;
+            --primary-dark: #b03a52;
+            --secondary: #9d4edd;
+            --secondary-dark: #7b3bb0;
+            --text: #1e1e24;
+            --text-light: #5a5a6e;
+            --bg: #ffffff;
+            --bg-alt: #fdf3f5;
+            --card: #ffffff;
+            --border: #e9ecef;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.02);
+            --shadow-md: 0 12px 30px rgba(0,0,0,0.05);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .dark-mode {
+            --primary: #ff6b8b;
+            --secondary: #b185ff;
+            --text: #f2f0f0;
+            --text-light: #bebebe;
+            --bg: #1a1418;
+            --bg-alt: #2c1e26;
+            --card: #2a1f24;
+            --border: #3f2e38;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 34px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 40px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 20px rgba(212, 76, 104, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(212, 76, 104, 0.4);
+        }
+        
+        /* header - exactly like original */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--bg);
+            backdrop-filter: blur(8px);
+            background-color: rgba(var(--bg-rgb), 0.8);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        
+        .logo-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .logo-name span {
+            color: var(--primary);
+            font-style: italic;
+        }
+        
+        .logo-sub {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links a.active {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.3rem;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* footer - exactly like original */
+        footer {
+            background-color: var(--bg-alt);
+            padding: 60px 0 30px;
+            margin-top: auto; /* pushes footer down */
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient);
+        }
+        
+        .footer-col p, .footer-col a {
+            color: var(--text-light);
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: var(--card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+        
+        .social-link:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            background-color: #128C7E;
+        }
+
+        /* ---------- coming soon specific (minimal) ---------- */
+        .coming-soon-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 140px 24px 80px; /* header height offset */
+            background: var(--bg);
+            text-align: center;
+        }
+        .coming-soon-content {
+            max-width: 700px;
+        }
+        .coming-soon-content i {
+            font-size: 4rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        .coming-soon-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .coming-soon-content p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: left 0.3s;
+                z-index: 999;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .footer-bottom {
+                flex-direction: column;
+            }
+            nav > div:last-child {
+                gap: 15px;
+                display: flex;
+                align-items: center;
+            }
+            .theme-toggle + .hamburger {
+                margin-left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - identical to original -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-guitar"></i>
+                    <div class="logo-text">
+                        <span class="logo-name">Onjula <span>Praise</span></span>
+                        <span class="logo-sub">QUEEN OF SEBEN</span>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="sounds.html">Sounds</a></li>
+                    <li><a href="team.html" class="active">Team</a></li>
+                    <li><a href="moments.html">Moments</a></li>
+                    <li><a href="contact.html">Connect</a></li>
+                </ul>
+                <div style="display: flex; align-items: center;">
+                    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                    <div class="hamburger"><i class="fas fa-bars"></i></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT - just "coming soon" -->
+    <main class="coming-soon-main">
+        <div class="coming-soon-content">
+            <i class="fas fa-tools"></i>
+            <h2>coming soon</h2>
+            <p>the team page is under construction — check back later!</p>
+        </div>
+    </main>
+
+    <!-- Footer - exactly as original -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Onjula Praise</h4>
+                    <p>Queen of Seben. Soulful vocals, electric stage presence. Redefining modern Afro‑music with the heartbeat of seben.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Discover</h4>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="sounds.html">Sounds</a>
+                    <a href="moments.html">Moments</a>
+                    <a href="contact.html">Connect</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Social</h4>
+                    <a href="https://www.youtube.com/@onjulapraise1">YouTube</a>
+                    <a href="https://www.instagram.com/_onjula.praise?igsh=d3Q3bGp3M2ZpeW5r">Instagram</a>
+                    <a href="https://www.tiktok.com/@onjulapraise1?_t=ZM-8uOmEDLihZF&_r=1">TikTok</a>
+                    <a href="https://open.spotify.com/artist/5762y6kIWu61kE5PGm6ocg?si=X8LWVAgQQLGK5J3rDKtFig&nd=1&utm_medium=organic&_branch_referrer=H4sIAAAAAAAAA72N0QqCMBiFn2ZeKmquCCSiMsou8ia7k7nmHM5t%2FNuIbnr2NOgVgnNxOB8fp3fO2HUUWaOd6F4hMSaUQg3RxoB%2BeOpybZgKULLovJSNB5n3s4LSLUqKKTMOfzbV4zQRcMK6qWRLnLzwcKo9jodDdj2OWFOO0sIKlO7vq0t92%2FKquhzL7JzCvnSF4N8rImVL6PCHO5Rg9ZhoHHSMOA8s18CJEjR4A%2BsYgFC8aUE%2FLYN814Me2Qcx5MFiMwEAAA%3D%3D&product=open&%24full_url=https%3A%2F%2Fopen.spotify.com%2Fartist%2F5762y6kIWu61kE5PGm6ocg%3Fsi%3DX8LWVAgQQLGK5J3rDKtFig&feature=organic&_branch_match_id=1497671040941597499">Spotify</a>
+                    <a href="https://www.facebook.com/@toto.onjula/?hr=1&wtsid=rdr_0iP1CMgigYmwPnGuU">Facebook</a>
+                </div>
+                <div class="footer-col">
+                    <h4>let's connect</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                    <p><i class="fas fa-envelope"></i> xxxxxxxx@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +254 xxx xxx xxx</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="https://open.spotify.com/artist/5762y6kIWu61kE5PGm6ocg?si=X8LWVAgQQLGK5J3rDKtFig&nd=1&utm_medium=organic&_branch_referrer=H4sIAAAAAAAAA72N0QqCMBiFn2ZeKmquCCSiMsou8ia7k7nmHM5t%2FNuIbnr2NOgVgnNxOB8fp3fO2HUUWaOd6F4hMSaUQg3RxoB%2BeOpybZgKULLovJSNB5n3s4LSLUqKKTMOfzbV4zQRcMK6qWRLnLzwcKo9jodDdj2OWFOO0sIKlO7vq0t92%2FKquhzL7JzCvnSF4N8rImVL6PCHO5Rg9ZhoHHSMOA8s18CJEjR4A%2BsYgFC8aUE%2FLYN814Me2Qcx5MFiMwEAAA%3D%3D&product=open&%24full_url=https%3A%2F%2Fopen.spotify.com%2Fartist%2F5762y6kIWu61kE5PGm6ocg%3Fsi%3DX8LWVAgQQLGK5J3rDKtFig&feature=organic&_branch_match_id=1497671040941597499" class="social-link"><i class="fab fa-spotify"></i></a>
+                    <a href="https://www.youtube.com/@onjulapraise1" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/_onjula.praise?igsh=d3Q3bGp3M2ZpeW5r" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@onjulapraise1?_t=ZM-8uOmEDLihZF&_r=1" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.facebook.com/@toto.onjula/?hr=1&wtsid=rdr_0iP1CMgigYmwPnGuU" class="social-link"><i class="fab fa-facebook"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; 2025 Onjula Praise · Queen of Seben
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="whatsapp-float" onclick="return false;"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        // Mobile navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            body.classList.add(currentTheme);
+            updateThemeIcon();
+        }
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark-mode' : '');
+            updateThemeIcon();
+        });
+        function updateThemeIcon() {
+            themeToggle.innerHTML = body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        // Header shadow
+        window.addEventListener('scroll', () => {
+            document.querySelector('header').classList.toggle('shadow', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team | Onjula Praise · Queen of Seben</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- global styles ---------- */
+        :root {
+            --primary: #d44c68;
+            --primary-dark: #b03a52;
+            --secondary: #9d4edd;
+            --secondary-dark: #7b3bb0;
+            --text: #1e1e24;
+            --text-light: #5a5a6e;
+            --bg: #ffffff;
+            --bg-alt: #fdf3f5;
+            --card: #ffffff;
+            --border: #e9ecef;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.02);
+            --shadow-md: 0 12px 30px rgba(0,0,0,0.05);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .dark-mode {
+            --primary: #ff6b8b;
+            --secondary: #b185ff;
+            --text: #f2f0f0;
+            --text-light: #bebebe;
+            --bg: #1a1418;
+            --bg-alt: #2c1e26;
+            --card: #2a1f24;
+            --border: #3f2e38;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 34px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 40px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 20px rgba(212, 76, 104, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(212, 76, 104, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+        
+        /* header */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--bg);
+            backdrop-filter: blur(8px);
+            background-color: rgba(var(--bg-rgb), 0.8);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        
+        .logo-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .logo-name span {
+            color: var(--primary);
+            font-style: italic;
+        }
+        
+        .logo-sub {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links a.active {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.3rem;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* footer */
+        footer {
+            background-color: var(--bg-alt);
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient);
+        }
+        
+        .footer-col p, .footer-col a {
+            color: var(--text-light);
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: var(--card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+        
+        .social-link:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            background-color: #128C7E;
+        }
+
+        /* ---------- team page specific ---------- */
+        .page-header {
+            padding: 140px 0 40px;
+            background-color: var(--bg-alt);
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .team-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 40px auto 20px;
+            color: var(--text-light);
+            font-size: 1.15rem;
+        }
+
+        /* core team grid (big cards) */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .team-card {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 30px 20px 25px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+        .team-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 4px solid var(--primary);
+            box-shadow: 0 8px 20px rgba(212,76,104,0.2);
+            background: #e0d6d9;
+        }
+        .team-card h3 {
+            margin-bottom: 5px;
+        }
+        .team-role {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        .team-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            padding: 0 8px;
+        }
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .team-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+        .team-social a:hover {
+            background: var(--gradient);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* new grid for additional members (small cards with image OR icon) */
+        .small-team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0 20px;
+        }
+        .small-team-card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 20px 15px 18px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s;
+        }
+        .small-team-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+        /* profile image - if src is empty we hide it and show icon container */
+        .small-team-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 3px solid var(--primary);
+            background: #d9d0d3;
+            display: block;
+        }
+        /* when image is missing (src="") we hide it and show .profile-icon-placeholder instead */
+        .small-team-img[src=""] {
+            display: none;
+        }
+        .small-team-img[src=""] + .profile-icon-placeholder {
+            display: flex !important;
+        }
+        .profile-icon-placeholder {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            border: 3px solid var(--primary);
+            background: var(--bg-alt);
+            display: none;  /* hidden by default */
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary);
+            box-shadow: 0 8px 20px rgba(212,76,104,0.2);
+        }
+        .small-team-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .small-team-card .role {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        .small-team-card .instagram-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-alt);
+            padding: 6px 16px;
+            border-radius: 40px;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        .small-team-card .instagram-link i {
+            font-size: 1rem;
+        }
+        .small-team-card .instagram-link:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .values-block {
+            background: var(--card);
+            border-radius: 30px;
+            padding: 50px;
+            margin: 60px 0;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        .values-block i {
+            font-size: 2.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        .values-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .value-item {
+            flex: 1 1 200px;
+        }
+        .value-item h4 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .collab-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .collab-card {
+            background: var(--bg-alt);
+            border-radius: 16px;
+            padding: 25px 15px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .collab-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .collab-card h4 {
+            margin-bottom: 8px;
+        }
+        .collab-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .join-cta {
+            text-align: center;
+            background: var(--gradient);
+            padding: 60px;
+            border-radius: 40px;
+            color: white;
+            margin: 60px 0;
+        }
+        .join-cta h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .join-cta .btn {
+            background: white;
+            color: var(--primary);
+            box-shadow: none;
+        }
+        .join-cta .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 900px) {
+            .collab-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: left 0.3s;
+                z-index: 999;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .footer-bottom {
+                flex-direction: column;
+            }
+            .collab-grid {
+                grid-template-columns: 1fr;
+            }
+            nav > div:last-child {
+                gap: 15px;
+                display: flex;
+                align-items: center;
+            }
+            .theme-toggle + .hamburger {
+                margin-left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-guitar"></i>
+                    <div class="logo-text">
+                        <span class="logo-name">Onjula <span>Praise</span></span>
+                        <span class="logo-sub">QUEEN OF SEBEN</span>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="sounds.html">Sounds</a></li>
+                    <li><a href="team.html" class="active">Team</a></li>
+                    <li><a href="moments.html">Moments</a></li>
+                    <li><a href="contact.html">Connect</a></li>
+                </ul>
+                <div style="display: flex; align-items: center;">
+                    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                    <div class="hamburger"><i class="fas fa-bars"></i></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="container">
+                <h1>The team behind</h1>
+                <p style="font-size:1.2rem; color: var(--text-light); margin-top: 10px;">creative minds · loyal hearts · seben family</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- intro -->
+            <div class="team-intro">
+                <p>Every beat, every stage, every moment is shaped by a circle of dedicated individuals. From production to ministry, here are the people who help bring Onjula's vision to life.</p>
+            </div>
+
+            <!-- CORE TEAM GRID (4 big cards) -->
+            <div class="team-grid">
+                <!-- 1. manager -->
+                <div class="team-card">
+                    <img src="" alt="xxxxx xxxxxx" class="team-img">
+                    <h3>xxxxx xxxxxx</h3>
+                    <div class="team-role">Manager & strategist</div>
+                    <p class="team-desc">With 10+ years in the music industry, xxxx handles bookings, partnerships, and keeps the vision on track.</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+                <!-- 2. music director -->
+                <div class="team-card">
+                    <img src="me-3.jpg.jpeg" alt="xxxxxx xxxxxx" class="team-img">
+                    <h3>xxxxxxx xxxxxxxx</h3>
+                    <div class="team-role">Music director / keys</div>
+                    <p class="team-desc">xxxxx arranges the music magic, leads the band, and ensures every performance is tight. </p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+                <!-- 3. worship coordinator -->
+                <div class="team-card">
+                    <img src="" alt="xxxxxxx xxxxx" class="team-img">
+                    <h3>xxxxxx xxxxxx</h3>
+                    <div class="team-role">Worship coordinator</div>
+                    <p class="team-desc">xxxxxx collaborates on worship arrangements and ministers alongside Onjula at conferences.</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+                <!-- 4. creative director -->
+                <div class="team-card">
+                    <img src="" alt="xxxxx xxxxx" class="team-img">
+                    <h3>xxxxxx xxxxxxx</h3>
+                    <div class="team-role">Creative director</div>
+                    <p class="team-desc">xxxxxx shapes the visual identity — from album art to stage design. </p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADDITIONAL MEMBERS (small cards with image OR profile icon) -->
+            <h3 style="text-align: center; margin: 40px 0 20px;">more members</h3>
+            <div class="small-team-grid">
+                <!-- James with placeholder image (will show icon) -->
+                <div class="small-team-card">
+                    <img src="" alt="xxxxxxx xxxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxxxx xxxxx</h4>
+                    <div class="role">Lead guitarist</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxx_xxxx</a>
+                </div>
+                <!-- Faith with actual image (via placeholder) but to show both we use a dummy image; we also keep icon fallback -->
+                <div class="small-team-card">
+                    <img src="me-3.jpg.jpeg" alt="xxxxxxx xxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxxxx xxxxxx</h4>
+                    <div class="role">Backing vocals</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxxxxx_xxxxxx</a>
+                </div>
+                <!-- Brian with empty src -> icon -->
+                <div class="small-team-card">
+                    <img src="" alt="xxxxx xxxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxx xxxxxxx</h4>
+                    <div class="role">Sound tech</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxxxxx_xx</a>
+                </div>
+                <!-- Lucy with image -->
+                <div class="small-team-card">
+                    <img src="" alt="xxx xxxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxx xxxxxxx</h4>
+                    <div class="role">Dancer/choreo</div>
+                    <a href="xxxxxxx" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxxxxx_u</a>
+                </div>
+                <!-- Samuel empty -> icon -->
+                <div class="small-team-card">
+                    <img src="" alt="xxxxxxx xxxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxxxx xxxxxxx</h4>
+                    <div class="role">Lighting design</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxx_ggg</a>
+                </div>
+                <!-- Grace Njeri with image -->
+                <div class="small-team-card">
+                    <img src="" alt="xxxx xxxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxx xxxxxxx</h4>
+                    <div class="role">Merchandise</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxxxxxxxxx</a>
+                </div>
+                <!-- Daniel Mwangi (the one you mentioned) empty -> icon -->
+                <div class="small-team-card">
+                    <img src="" alt="xxxxx xxxxxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxxxx xxxxxxxxxx</h4>
+                    <div class="role">Stage manager</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxx_xxxxxxx</a>
+                </div>
+                <!-- Purity with image -->
+                <div class="small-team-card">
+                    <img src="" alt="xxxxxxx xxxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxxxx xxxxxxx</h4>
+                    <div class="role">Media coordinator</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxxxxxxxx</a>
+                </div>
+                <div class="small-team-card">
+                    <img src="me-3.jpg.jpeg" alt="xxxxxxx xxxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxxx xxxxxxx</h4>
+                    <div class="role">Backing vocals</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxxxxxzxxxx</a>
+                </div>
+                <!-- Brian with empty src -> icon -->
+                <div class="small-team-card">
+                    <img src="" alt="xxxxxxx xxxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxxxx xxxxxxx</h4>
+                    <div class="role">Media coordinator</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxxxxxxxx</a>
+                </div>
+                <div class="small-team-card">
+                    <img src="me-3.jpg.jpeg" alt="xxxxxxx xxxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxxx xxxxxxx</h4>
+                    <div class="role">Backing vocals</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxxxxxzxxxx</a>
+                </div>
+                <!-- Samuel empty -> icon -->
+                <div class="small-team-card">
+                    <img src="" alt="xxxxxx xxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxx xxxxx</h4>
+                    <div class="role">Lighting design</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxx'_xxx</a>
+                </div>
+                <div class="small-team-card">
+                    <img src="me-3.jpg.jpeg" alt="xxxxx xxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxxx xxxxxx</h4>
+                    <div class="role">Backing vocals</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxxxxx_xxxxxxx</a>
+                </div>
+                <!-- Brian with empty src -> icon -->
+                <div class="small-team-card">
+                    <img src="" alt="xxxxxxx xxxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxx xxxxxx</h4>
+                    <div class="role">Sound tech</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxxx_xxxxxxx</a>
+                </div>
+                <!-- Lucy with image -->
+                <div class="small-team-card">
+                    <img src="" alt="xxxxx xxxxxxx" class="small-team-img">
+                    <div class="profile-icon-placeholder"><i class="fas fa-user-circle"></i></div>
+                    <h4>xxxxx xxxxxxx</h4>
+                    <div class="role">Dancer/choreo</div>
+                    <a href="#" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> @xxxxxxxxx_ff</a>
+                </div>
+                
+            </div>
+
+            <!-- EXTENDED / COLLABORATORS -->
+            <div style="background: var(--bg-alt); border-radius: 30px; padding: 40px; margin: 40px 0;">
+                <h3 style="text-align: center; margin-bottom: 30px;">often on the road with</h3>
+                <div class="collab-grid">
+                    <div class="collab-card">
+                        <i class="fas fa-drum"></i>
+                        <h4>sssssss "xxxxxxx"</h4>
+                        <p>percussion / drummer — the heartbeat of seben</p>
+                    </div>
+                    <div class="collab-card">
+                        <i class="fas fa-guitar"></i>
+                        <h4>sssssss xxxx</h4>
+                        <p>bass guitarist / backing vocals</p>
+                    </div>
+                    <div class="collab-card">
+                        <i class="fas fa-headphones"></i>
+                        <h4>xxxxx sssss</h4>
+                        <p>sound engineer (live & studio)</p>
+                    </div>
+                    <div class="collab-card">
+                        <i class="fas fa-camera"></i>
+                        <h4>sssss xxxxx</h4>
+                        <p>photographer / videographer</p>
+                    </div>
+                    <div class="collab-card">
+                        <i class="fas fa-hands-praying"></i>
+                        <h4> xxxxx ssssss</h4>
+                        <p>prayer partner / backstage support</p>
+                    </div>
+                    <div class="collab-card">
+                        <i class="fas fa-bullhorn"></i>
+                        <h4>sssss xxxxx</h4>
+                        <p>digital & publicity team</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VALUES -->
+            <h3 style="text-align: center; margin: 60px 0 20px;">together we stand</h3>
+            <div class="values-block">
+                <i class="fas fa-heart"></i>
+                <p style="max-width: 700px; margin: 0 auto; color: var(--text-light);">The team operates on faith, excellence, and a shared love for African music. Every member is committed to uplifting Onjula's ministry while staying true to the heartbeat of seben.</p>
+                <div class="values-flex">
+                    <div class="value-item">
+                        <h4>🙏🏾 faith-driven</h4>
+                        <p>we pray before every show</p>
+                    </div>
+                    <div class="value-item">
+                        <h4>🔥 excellence</h4>
+                        <p>rehearsals, details, love</p>
+                    </div>
+                    <div class="value-item">
+                        <h4>🤝🏾 family</h4>
+                        <p>support on and off stage</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TEAM QUOTE -->
+            <div style="text-align: center; background: var(--card); padding: 50px; border-radius: 30px; margin: 60px 0; border: 1px solid var(--border);">
+                <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--primary); opacity: 0.5;"></i>
+                <p style="font-size: 1.5rem; font-style: italic; max-width: 800px; margin: 20px auto; color: var(--text-light);">
+                    “I'm surrounded by people who don't just work hard — they believe in the vision. That makes every victory sweeter.”
+                </p>
+                <p style="font-weight: 600;">— Onjula Praise, on her team</p>
+            </div>
+
+            <!-- CALL TO ACTION -->
+            <div class="join-cta">
+                <h2>become part of the journey</h2>
+                <p style="margin-bottom: 30px; opacity: 0.9;">Interested in collaborating, interning, or serving with the team? We'd love to hear from you.</p>
+                <a href="contact.html" class="btn">reach out to the team</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Onjula Praise</h4>
+                    <p>Queen of Seben. Soulful vocals, electric stage presence. Redefining modern Afro‑music with the heartbeat of seben.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Discover</h4>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="sounds.html">Sounds</a>
+                    <a href="moments.html">Moments</a>
+                    <a href="contact.html">Connect</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Social</h4>
+                    <a href="https://www.youtube.com/@onjulapraise1">YouTube</a>
+                    <a href="https://www.instagram.com/_onjula.praise?igsh=d3Q3bGp3M2ZpeW5r">Instagram</a>
+                    <a href="https://www.tiktok.com/@onjulapraise1?_t=ZM-8uOmEDLihZF&_r=1">TikTok</a>
+                    <a href="https://open.spotify.com/artist/5762y6kIWu61kE5PGm6ocg?si=X8LWVAgQQLGK5J3rDKtFig&nd=1&utm_medium=organic&_branch_referrer=H4sIAAAAAAAAA72N0QqCMBiFn2ZeKmquCCSiMsou8ia7k7nmHM5t%2FNuIbnr2NOgVgnNxOB8fp3fO2HUUWaOd6F4hMSaUQg3RxoB%2BeOpybZgKULLovJSNB5n3s4LSLUqKKTMOfzbV4zQRcMK6qWRLnLzwcKo9jodDdj2OWFOO0sIKlO7vq0t92%2FKquhzL7JzCvnSF4N8rImVL6PCHO5Rg9ZhoHHSMOA8s18CJEjR4A%2BsYgFC8aUE%2FLYN814Me2Qcx5MFiMwEAAA%3D%3D&product=open&%24full_url=https%3A%2F%2Fopen.spotify.com%2Fartist%2F5762y6kIWu61kE5PGm6ocg%3Fsi%3DX8LWVAgQQLGK5J3rDKtFig&feature=organic&_branch_match_id=1497671040941597499">Spotify</a>
+                    <a href="https://www.facebook.com/@toto.onjula/?hr=1&wtsid=rdr_0iP1CMgigYmwPnGuU">Facebook</a>
+                </div>
+                <div class="footer-col">
+                    <h4>let's connect</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                    <p><i class="fas fa-envelope"></i> xxxxxxxx@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +254 xxx xxx xxx</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="https://open.spotify.com/artist/5762y6kIWu61kE5PGm6ocg?si=X8LWVAgQQLGK5J3rDKtFig&nd=1&utm_medium=organic&_branch_referrer=H4sIAAAAAAAAA72N0QqCMBiFn2ZeKmquCCSiMsou8ia7k7nmHM5t%2FNuIbnr2NOgVgnNxOB8fp3fO2HUUWaOd6F4hMSaUQg3RxoB%2BeOpybZgKULLovJSNB5n3s4LSLUqKKTMOfzbV4zQRcMK6qWRLnLzwcKo9jodDdj2OWFOO0sIKlO7vq0t92%2FKquhzL7JzCvnSF4N8rImVL6PCHO5Rg9ZhoHHSMOA8s18CJEjR4A%2BsYgFC8aUE%2FLYN814Me2Qcx5MFiMwEAAA%3D%3D&product=open&%24full_url=https%3A%2F%2Fopen.spotify.com%2Fartist%2F5762y6kIWu61kE5PGm6ocg%3Fsi%3DX8LWVAgQQLGK5J3rDKtFig&feature=organic&_branch_match_id=1497671040941597499" class="social-link"><i class="fab fa-spotify"></i></a>
+                    <a href="https://www.youtube.com/@onjulapraise1" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/_onjula.praise?igsh=d3Q3bGp3M2ZpeW5r" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@onjulapraise1?_t=ZM-8uOmEDLihZF&_r=1" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.facebook.com/@toto.onjula/?hr=1&wtsid=rdr_0iP1CMgigYmwPnGuU" class="social-link"><i class="fab fa-facebook"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; 2025 Onjula Praise · Queen of Seben
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="whatsapp-float" onclick="return false;"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        // Mobile navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            body.classList.add(currentTheme);
+            updateThemeIcon();
+        }
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark-mode' : '');
+            updateThemeIcon();
+        });
+        function updateThemeIcon() {
+            themeToggle.innerHTML = body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        // Header shadow
+        window.addEventListener('scroll', () => {
+            document.querySelector('header').classList.toggle('shadow', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>
