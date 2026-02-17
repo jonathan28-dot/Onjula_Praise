@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onjula Praise | Connect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- global styles (matching index/moments/sounds) ---------- */
+        :root {
+            --primary: #d44c68;
+            --primary-dark: #b03a52;
+            --secondary: #9d4edd;
+            --secondary-dark: #7b3bb0;
+            --text: #1e1e24;
+            --text-light: #5a5a6e;
+            --bg: #ffffff;
+            --bg-alt: #fdf3f5;
+            --card: #ffffff;
+            --border: #e9ecef;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.02);
+            --shadow-md: 0 12px 30px rgba(0,0,0,0.05);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .dark-mode {
+            --primary: #ff6b8b;
+            --secondary: #b185ff;
+            --text: #f2f0f0;
+            --text-light: #bebebe;
+            --bg: #1a1418;
+            --bg-alt: #2c1e26;
+            --card: #2a1f24;
+            --border: #3f2e38;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 34px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 40px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 20px rgba(212, 76, 104, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(212, 76, 104, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+        
+        /* header - exactly like index/moments/sounds */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--bg);
+            backdrop-filter: blur(8px);
+            background-color: rgba(var(--bg-rgb), 0.8);
+            transition: box-shadow 0.3s;            
+            box-shadow: var(--shadow-sm);
+
+        }
+        
+        header.shadow {
+            box-shadow: var(--shadow-sm);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        
+        .logo-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .logo-name span {
+            color: var(--primary);            
+            font-style: italic;
+
+        }
+        
+        .logo-sub {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links a.active {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.3rem;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Contact page specific */
+        .page-header {
+            padding: 140px 0 40px;
+            background-color: var(--bg-alt);
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .connect-grid {
+            display: flex;
+            gap: 40px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+        
+        .connect-info {
+            flex: 1 1 300px;
+        }
+        
+        .connect-form {
+            flex: 1 1 400px;
+        }
+        
+        .info-card {
+            background-color: var(--card);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .info-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .info-text p {
+            color: var(--text-light);
+        }
+        
+        .social-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .social-block {
+            background-color: var(--card);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+        
+        .social-block h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .social-icons a {
+            width: 48px;
+            height: 48px;
+            background-color: var(--bg-alt);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+        
+        .social-icons a:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .contact-form-card {
+            background-color: var(--card);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            font-size: 1rem;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        textarea.form-control {
+            border-radius: 24px;
+            min-height: 130px;
+            resize: vertical;
+        }
+        
+        .subscribe-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .subscribe-group .form-control {
+            flex: 1 1 200px;
+        }
+        
+        .subscribe-group .btn {
+            flex: 0 0 auto;
+        }
+        
+        .footer-quote {
+            text-align: center;
+            margin: 60px 0 20px;
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        /* Footer - matching index/moments/sounds */
+        footer {
+            background-color: var(--bg-alt);
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient);
+        }
+        
+        .footer-col p, .footer-col a {
+            color: var(--text-light);
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: var(--card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+        
+        .social-link:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            background-color: #128C7E;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: left 0.3s;
+                z-index: 999;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .footer-bottom {
+                flex-direction: column;
+            }
+            .subscribe-group {
+                flex-direction: column;
+            }
+            
+            nav > div:last-child {
+                gap: 15px;  /* Adjust this value to control the space */
+                display: flex;
+                align-items: center;
+            }
+
+            /* If the above doesn't work, a more specific selector: */
+            .theme-toggle + .hamburger {
+                margin-left: 15px;  /* Adds space specifically between the two icons */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-guitar"></i>
+                    <div class="logo-text">
+                        <span class="logo-name">Onjula <span>Praise</span></span>
+                        <span class="logo-sub">QUEEN OF SEBEN</span>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="sounds.html">Sounds</a></li>
+                    <li><a href="moments.html">Moments</a></li>
+                    <li><a href="contact.html" class="active">Connect</a></li>
+                </ul>
+                <div style="display: flex; align-items: center;">
+                    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                    <div class="hamburger"><i class="fas fa-bars"></i></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="container">
+                <h1>stay connected</h1>
+                <p style="font-size: 1.2rem; color: var(--text-light); margin-top: 10px;">reach out, follow, or just feel the rhythm</p>
+            </div>
+        </div>
+
+        <!-- Main connect grid -->
+        <div class="container">
+            <div class="connect-grid">
+                <!-- LEFT: info & social subscribe -->
+                <div class="connect-info">
+                    <!-- contact info card -->
+                    <div class="info-card">
+                        <h3 style="margin-bottom: 25px;">get in touch</h3>
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="info-text">
+                                <h4>based in</h4>
+                                <p>Nairobi, Kenya · creating worldwide</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="info-text">
+                                <h4>email</h4>
+                                <p>praise.onjula@sebenqueen.com</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-phone"></i></div>
+                            <div class="info-text">
+                                <h4>management</h4>
+                                <p>+254 768 062 600</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- social media + subscribe block -->
+                    <div class="social-wrapper">
+                        <div class="social-block">
+                            <h3><i class="fas fa-heart" style="color: var(--primary); margin-right: 8px;"></i> follow Onjula Praise</h3>
+                            <div class="social-icons">
+                                <a href="#" target="_blank"><i class="fab fa-spotify"></i></a>
+                                <a href="https://www.youtube.com/@onjulapraise1" target="_blank"><i class="fab fa-youtube"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                            </div>
+                        </div>
+                        
+                        <!-- newsletter subscription -->
+                        <div class="social-block">
+                            <h3><i class="fas fa-envelope-open-text" style="color: var(--primary); margin-right: 8px;"></i> subscribe to vibes</h3>
+                            <p style="margin-bottom: 15px; color: var(--text-light);">get monthly notes, exclusive demos & seben stories</p>
+                            <form action="https://formspree.io/f/yournewsletterid" method="POST" class="subscribe-group">
+                                <input type="email" name="email" class="form-control" placeholder="your.email@example.com" required>
+                                <button type="submit" class="btn">Subscribe</button>
+                            </form>
+                            <p style="font-size: 0.8rem; margin-top: 12px; color: var(--text-light);">no spam, only rhythm. unsubscribe anytime.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: contact form -->
+                <div class="connect-form">
+                    <div class="contact-form-card">
+                        <h3 style="margin-bottom: 25px; text-align: center;">send a message</h3>
+                        <form action="https://formspree.io/f/movlnwgp" method="POST">
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" placeholder="your name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="_replyto" class="form-control" placeholder="email address" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="_subject" class="form-control" placeholder="subject (optional)">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message" class="form-control" placeholder="your message..." required></textarea>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn" style="width: 100%;">send message</button>
+                            </div>
+                            <p style="font-size: 0.8rem; text-align: center; margin-top: 15px; color: var(--text-light);">Messages go straight to the queen's team.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- inspirational footer quote -->
+            <div class="footer-quote">
+                <i class="fas fa-quote-left" style="color: var(--primary); opacity: 0.6; margin-right: 8px;"></i>
+                music is the conversation between souls. let's keep talking.
+                <i class="fas fa-quote-right" style="color: var(--primary); opacity: 0.6; margin-left: 8px;"></i>
+                <br>— Onjula Praise
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer - matching index/moments/sounds -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Onjula Praise</h4>
+                    <p>Queen of Seben. Soulful vocals, electric stage presence.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>discover</h4>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">Story</a>
+                    <a href="sounds.html">Sounds</a>
+                    <a href="moments.html">Moments</a>
+                    <a href="contact.html">Connect</a>
+                </div>
+                <div class="footer-col">
+                    <h4>social</h4>
+                    <a href="https://www.youtube.com/@onjulapraise1" target="_blank">YouTube</a>
+                    <a href="#" target="_blank">Instagram</a>
+                    <a href="#" target="_blank">TikTok</a>
+                    <a href="#" target="_blank">Spotify</a>
+                </div>
+                <div class="footer-col">
+                    <h4>let's connect</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                    <p><i class="fas fa-envelope"></i> praise.onjula@sebenqueen.com</p>
+                    <p><i class="fas fa-phone"></i> +254 768 062 600</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-spotify"></i></a>
+                    <a href="https://www.youtube.com/@onjulapraise1" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Onjula Praise · Queen of Seben</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/254768062600" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            body.classList.add(currentTheme);
+            updateThemeIcon();
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark-mode' : '');
+            updateThemeIcon();
+        });
+        
+        function updateThemeIcon() {
+            if (body.classList.contains('dark-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+        
+        // Header shadow - fixed
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow');
+            } else {
+                header.classList.remove('shadow');
+            }
+        });
+    </script>
+</body>
+</html>

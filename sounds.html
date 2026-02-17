@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sounds | Onjula Praise · Queen of Seben</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- global styles (matching index/moments) ---------- */
+        :root {
+            --primary: #d44c68;
+            --primary-dark: #b03a52;
+            --secondary: #9d4edd;
+            --secondary-dark: #7b3bb0;
+            --text: #1e1e24;
+            --text-light: #5a5a6e;
+            --bg: #ffffff;
+            --bg-alt: #fdf3f5;
+            --card: #ffffff;
+            --border: #e9ecef;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.02);
+            --shadow-md: 0 12px 30px rgba(0,0,0,0.05);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .dark-mode {
+            --primary: #ff6b8b;
+            --secondary: #b185ff;
+            --text: #f2f0f0;
+            --text-light: #bebebe;
+            --bg: #1a1418;
+            --bg-alt: #2c1e26;
+            --card: #2a1f24;
+            --border: #3f2e38;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 34px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 40px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 20px rgba(212, 76, 104, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(212, 76, 104, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+        
+        /* header - exactly like moments/index with proper shadow */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--bg);
+            backdrop-filter: blur(8px);
+            background-color: rgba(var(--bg-rgb), 0.8);
+            transition: box-shadow 0.3s;            
+            box-shadow: var(--shadow-sm);
+
+        }
+        
+        header.shadow {
+            box-shadow: var(--shadow-sm);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        
+        .logo-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .logo-name span {
+            color: var(--primary);            
+            font-style: italic;
+
+        }
+        
+        .logo-sub {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links a.active {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.3rem;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* footer - matching index/moments */
+        footer {
+            background-color: var(--bg-alt);
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient);
+        }
+        
+        .footer-col p, .footer-col a {
+            color: var(--text-light);
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: var(--card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+        
+        .social-link:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            background-color: #128C7E;
+        }
+
+        /* page specific */
+        .page-header {
+            padding: 140px 0 40px;
+            background-color: var(--bg-alt);
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sounds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        .sound-card {
+            background-color: var(--card);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        .sound-card:hover {
+            transform: translateY(-6px);
+        }
+        .sound-card i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .sound-card h3 {
+            margin-bottom: 15px;
+        }
+        .sound-card p {
+            color: var(--text-light);
+        }
+
+        .featured-sound {
+            background: linear-gradient(145deg, var(--bg-alt), var(--card));
+            border-radius: 30px;
+            padding: 40px;
+            margin: 50px 0;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            border: 1px solid var(--border);
+        }
+        .featured-sound .info {
+            flex: 2;
+        }
+        .featured-sound .stats {
+            flex: 1;
+            background: var(--card);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+        .featured-sound h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        .featured-sound .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .video-embed {
+            margin: 20px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .video-embed iframe {
+            width: 100%;
+            height: 220px;
+            border: none;
+        }
+        .social-follow-block {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .social-follow-block .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .social-follow-block .social-icons a {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-alt);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--text);
+            transition: .3s;
+        }
+        .social-follow-block .social-icons a:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: left 0.3s;
+                z-index: 999;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .footer-bottom {
+                flex-direction: column;
+            }
+            .featured-sound {
+                flex-direction: column;
+            }
+            nav > div:last-child {
+                gap: 15px;  /* Adjust this value to control the space */
+                display: flex;
+                align-items: center;
+            }
+
+            /* If the above doesn't work, a more specific selector: */
+            .theme-toggle + .hamburger {
+                margin-left: 15px;  /* Adds space specifically between the two icons */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-guitar"></i>
+                    <div class="logo-text">
+                        <span class="logo-name">Onjula <span>Praise</span></span>
+                        <span class="logo-sub">QUEEN OF SEBEN</span>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="sounds.html" class="active">Sounds</a></li>
+                    <li><a href="moments.html">Moments</a></li>
+                    <li><a href="contact.html">Connect</a></li>
+                </ul>
+                <div style="display: flex; align-items: center;">
+                    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                    <div class="hamburger"><i class="fas fa-bars"></i></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <div class="container">
+                <h1>Her musical touch</h1>
+                <p style="color: var(--text-light); font-size: 1.2rem;">sounds that move the soul – play, follow, enjoy</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- MOST PLAYED FEATURE -->
+            <div class="featured-sound">
+                <div class="info">
+                    <span style="background: var(--primary); color: white; padding: 4px 12px; border-radius: 40px; font-size: 0.8rem; text-transform: uppercase;">most played</span>
+                    <h2>Wa Ajabu</h2>
+                    <p style="font-size: 1.2rem; margin: 15px 0;">The anthem that took over airwaves and dance floors across Africa. A fusion of modern seben and soulful lyrics.</p>
+                    
+                    <div class="video-embed">
+                        <iframe src="WA AJABU (Live Recording Official Video)- ONJULA PRAISE.mp4" allowfullscreen></iframe>
+                    </div>
+
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
+                        <a href="https://www.youtube.com/@onjulapraise1" target="_blank" class="btn"><i class="fab fa-youtube"></i> Subscribe on YouTube</a>
+                        <a href="#" target="_blank" class="btn btn-outline"><i class="fab fa-spotify"></i> Follow on Spotify</a>
+                    </div>
+                </div>
+                <div class="stats">
+                    <i class="fas fa-play-circle" style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;"></i>
+                    <div class="stat-number">XXX,XXX,XXX</div>
+                    <p style="color: var(--text-light);">streams (all platforms)</p>
+                    <hr style="margin: 20px 0; border-color: var(--border);">
+                    <div><strong>⭐ XXX,XXX</strong> <span style="color: var(--text-light);">likes</span></div>
+                    <div><strong>📻 XXX,XXX</strong> <span style="color: var(--text-light);">radio spins</span></div>
+                </div>
+            </div>
+
+            <!-- SOCIAL FOLLOW SECTION -->
+            <div class="social-follow-block">
+                <h3><i class="fas fa-heart" style="color: var(--primary);"></i> Follow Onjula Praise</h3>
+                <p>Stay connected – new music, behind the scenes, and seben vibes</p>
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/@onjulapraise1" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-spotify"></i></a>
+                </div>
+            </div>
+
+            <!-- ALL SOUNDS GRID -->
+            <h3 style="text-align: center; margin: 60px 0 30px;">more sounds</h3>
+            <div class="sounds-grid">
+                <div class="sound-card">
+                    <i class="fas fa-microphone-alt"></i>
+                    <h3>Live performance</h3>
+                    <p>Electric stage presence – <a href="https://youtube.com/@onjulapraise" target="_blank">watch live sets on YouTube</a>.</p>
+                </div>
+                <div class="sound-card">
+                    <i class="fas fa-music"></i>
+                    <h3>Studio vocals</h3>
+                    <p>Rich, warm vocals – <a href="https://youtube.com/@onjulapraise" target="_blank">listen to studio recordings</a>.</p>
+                </div>
+                <div class="sound-card">
+                    <i class="fas fa-headphones"></i>
+                    <h3>Songwriting & toplines</h3>
+                    <p>Lyrics that linger – <a href="https://youtube.com/@onjulapraise" target="_blank">hear her originals</a>.</p>
+                </div>
+                <div class="sound-card">
+                    <i class="fas fa-record-vinyl"></i>
+                    <h3>Seben workshops</h3>
+                    <p>Teaching the groove – <a href="https://youtube.com/@onjulapraise" target="_blank">workshop highlights</a>.</p>
+                </div>
+                <div class="sound-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Feature artist</h3>
+                    <p>Collaborations – <a href="https://youtube.com/@onjulapraise" target="_blank">watch features</a>.</p>
+                </div>
+                <div class="sound-card">
+                    <i class="fas fa-hand-peace"></i>
+                    <h3>Cultural ambassador</h3>
+                    <p>Interviews & talks – <a href="https://youtube.com/@onjulapraise" target="_blank">see her on YouTube</a>.</p>
+                </div>
+            </div>
+
+            <!-- DISCOGRAPHY SNIPPET -->
+            <div style="background: var(--bg-alt); padding: 40px; border-radius: 30px; margin: 50px 0; text-align: center;">
+                <h3 style="margin-bottom: 20px;">essential recordings</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
+                    <div><i class="fas fa-compact-disc" style="color: var(--primary);"></i> <a href="#" target="_blank">"Ni Wewe" (single) – XXX,XXX,XXX</a></div>
+                    <div><i class="fas fa-compact-disc" style="color: var(--primary);"></i> <a href="#" target="_blank">"Wa Ajabu" (EP) – XXX,XXX,XXX</a></div>
+                    <div><i class="fas fa-compact-disc" style="color: var(--primary);"></i> <a href="#" target="_blank">"Ukae nami" – XXX,XXX,XXX</a></div>
+                </div>
+                <p style="margin-top: 20px;"><a href="https://www.youtube.com/@onjulapraise1" target="_blank">👉 visit official YouTube channel for all videos</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Onjula Praise</h4>
+                    <p>Queen of Seben. Soulful vocals, electric stage presence.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>discover</h4>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">Story</a>
+                    <a href="sounds.html">Sounds</a>
+                    <a href="moments.html">Moments</a>
+                    <a href="contact.html">Connect</a>
+                </div>
+                <div class="footer-col">
+                    <h4>social</h4>
+                    <a href="https://www.youtube.com/@onjulapraise1" target="_blank">YouTube</a>
+                    <a href="#" target="_blank">Instagram</a>
+                    <a href="#" target="_blank">TikTok</a>
+                    <a href="#" target="_blank">Spotify</a>
+                </div>
+                <div class="footer-col">
+                    <h4>let's connect</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                    <p><i class="fas fa-envelope"></i> praise.onjula@sebenqueen.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-spotify"></i></a>
+                    <a href="https://www.youtube.com/@onjulapraise1" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Onjula Praise (Queen of Seben).</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <a href="#" class="whatsapp-float" onclick="return false;"><i class="fab fa-whatsapp"></i></a>
+    
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
+        });
+        
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) { 
+            body.classList.add(currentTheme); 
+            updateIcon(); 
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark-mode' : '');
+            updateIcon();
+        });
+        
+        function updateIcon() {
+            themeToggle.innerHTML = body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+        
+        // Header shadow on scroll - fixed
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow');
+            } else {
+                header.classList.remove('shadow');
+            }
+        });
+    </script>
+</body>
+</html>

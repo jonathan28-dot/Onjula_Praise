@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moments | Onjula Praise · Worship Archive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- global styles (matching index exactly) ---------- */
+        :root {
+            --primary: #d44c68;
+            --primary-dark: #b03a52;
+            --secondary: #9d4edd;
+            --secondary-dark: #7b3bb0;
+            --text: #1e1e24;
+            --text-light: #5a5a6e;
+            --bg: #ffffff;
+            --bg-alt: #fdf3f5;
+            --card: #ffffff;
+            --border: #e9ecef;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.02);
+            --shadow-md: 0 12px 30px rgba(0,0,0,0.05);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .dark-mode {
+            --primary: #ff6b8b;
+            --secondary: #b185ff;
+            --text: #f2f0f0;
+            --text-light: #bebebe;
+            --bg: #1a1418;
+            --bg-alt: #2c1e26;
+            --card: #2a1f24;
+            --border: #3f2e38;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 34px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 40px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 20px rgba(212, 76, 104, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(212, 76, 104, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+        
+        /* header - exactly like index with proper shadow */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--bg);
+            backdrop-filter: blur(8px);
+            background-color: rgba(var(--bg-rgb), 0.8);
+            transition: box-shadow 0.3s;
+            box-shadow: var(--shadow-sm);
+
+        }
+        
+        header.shadow {
+            box-shadow: var(--shadow-sm);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        
+        .logo-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .logo-name span {
+            color: var(--primary);
+            font-style: italic;
+
+        }
+        
+        .logo-sub {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links a.active {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.3rem;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* footer - matching index */
+        footer {
+            background-color: var(--bg-alt);
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient);
+        }
+        
+        .footer-col p, .footer-col a {
+            color: var(--text-light);
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: var(--card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+        
+        .social-link:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            background-color: #128C7E;
+        }
+
+        /* ---------- moments page specific - rich media ---------- */
+        .page-header {
+            padding: 140px 0 40px;
+            background: linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .page-header h1 {
+            font-size: 3.2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 10px auto 0;
+            color: var(--text-light);
+        }
+
+        /* featured hero video - most viewed */
+        .hero-video-section {
+            margin: 40px 0;
+        }
+        .hero-video-card {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            background: var(--card);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+        .hero-player {
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+        }
+        .hero-player iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+        .hero-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .hero-info .badge {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            display: inline-block;
+            width: fit-content;
+            margin-bottom: 15px;
+        }
+        .hero-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .hero-stats .stat {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .hero-stats .stat small {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        /* video grid - 3 columns */
+        .video-grid-section {
+            margin: 60px 0;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .video-card {
+            background: var(--card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+        }
+        .video-card:hover {
+            transform: translateY(-6px);
+        }
+        .video-thumbnail {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .video-card:hover .play-overlay {
+            opacity: 1;
+        }
+        .play-overlay i {
+            font-size: 3rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .video-info {
+            padding: 20px;
+        }
+        .video-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .video-views {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* photo mosaic gallery */
+        .photo-gallery-section {
+            margin: 80px 0;
+        }
+        .photo-mosaic {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 200px;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .mosaic-item {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+        .mosaic-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .mosaic-item:hover img {
+            transform: scale(1.1);
+        }
+        .mosaic-item.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+        .mosaic-item.medium {
+            grid-row: span 2;
+        }
+        .mosaic-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        .mosaic-item:hover .mosaic-overlay {
+            transform: translateY(0);
+        }
+
+        /* worship highlights section */
+        .worship-highlights {
+            background: var(--bg-alt);
+            border-radius: 40px;
+            padding: 50px;
+            margin: 60px 0;
+        }
+
+        /* instagram feed simulation */
+        .insta-feed {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .insta-post {
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            position: relative;
+        }
+        .insta-post img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .insta-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .insta-post:hover .insta-overlay {
+            opacity: 1;
+        }
+        .insta-overlay i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: left 0.3s;
+                z-index: 999;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .footer-bottom {
+                flex-direction: column;
+            }
+            .hero-video-card {
+                grid-template-columns: 1fr;
+            }
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            .photo-mosaic {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .insta-feed {
+                grid-template-columns: 1fr;
+            }
+            nav > div:last-child {
+                gap: 15px;  /* Adjust this value to control the space */
+                display: flex;
+                align-items: center;
+            }
+
+            /* If the above doesn't work, a more specific selector: */
+            .theme-toggle + .hamburger {
+                margin-left: 15px;  /* Adds space specifically between the two icons */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-guitar"></i>
+                    <div class="logo-text">
+                        <span class="logo-name">Onjula <span>Praise</span></span>
+                        <span class="logo-sub">QUEEN OF SEBEN</span>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="sounds.html">Sounds</a></li>
+                    <li><a href="moments.html" class="active">Moments</a></li>
+                    <li><a href="contact.html">Connect</a></li>
+                </ul>
+                <div style="display: flex; align-items: center;">
+                    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                    <div class="hamburger"><i class="fas fa-bars"></i></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <div class="container">
+                <h1>worship moments</h1>
+                <p>spontaneous, unscripted, spirit-led encounters</p>
+            </div>
+        </div>
+
+        <!-- HERO VIDEO (most viewed) -->
+        <div class="container hero-video-section">
+            <div class="hero-video-card">
+                <div class="hero-player">
+                    <iframe 
+                        src="videoplayback (6).mp4" 
+                        title="Wi Museo Yesu"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="hero-info">
+                    <span class="badge"><i class="fas fa-crown"></i> most viewed worship</span>
+                    <h2>Wi Museo Yesu || Thanksgiving Spontaneous Worship Moment</h2>
+                    <p>with Min Onjula Praise @HighstepTV</p>
+                    <div class="hero-stats">
+                        <div class="stat">40K+ <small>views</small></div>
+                        <div class="stat">xx <small>days ago</small></div>
+                    </div>
+                    <a href="#" class="btn" style="margin-top: 15px; width: fit-content;"><i class="fab fa-youtube"></i> watch full video</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIDEO GRID (all worship moments) -->
+        <div class="container video-grid-section">
+            <h2 style="text-align: center; margin-bottom: 40px;">recent worship moments</h2>
+            <div class="video-grid">
+                <!-- Ni Wewe -->
+                <div class="video-card">
+                    
+                    <div class="video-info">
+                        <h4>Ni Wewe By Onjula Praise Ft Abby Nyawira Official video</h4>
+                        <div class="video-meta">
+                            <span class="video-views">218K views</span>
+                            <span>4 months ago</span>
+                        </div>
+                        <a href="https://www.youtube.com/watch?v=HTT-yKs1KBU" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Ukae nami -->
+                <div class="video-card">
+                    
+                    <div class="video-info">
+                        <h4>Ukae nami || Deep prayer Worship moment with Minister Onjula Praise</h4>
+                        <div class="video-meta">
+                            <span class="video-views">21K views</span>
+                            <span>5 months ago</span>
+                        </div>
+                        <a href="https://www.youtube.com/watch?v=xUPxxspiB8M" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Moyo wangu -->
+                <div class="video-card">
+                    
+                    <div class="video-info">
+                        <h4>Moyo wangu usilie tena | Majina yote mazuri || Deep spontaneous worship moment</h4>
+                        <div class="video-meta">
+                            <span class="video-views">42K views</span>
+                            <span>5 months ago</span>
+                        </div>
+                        <a href="https://www.youtube.com/watch?v=LNw3BYBgMjQ&pp=0gcJCYcKAYcqIYzv" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- In His presence -->
+                <div class="video-card">
+                    
+                    <div class="video-info">
+                        <h4>In His presence Unscripted worship moments wit Onjula Praise</h4>
+                        <div class="video-meta">
+                            <span class="video-views">7K views</span>
+                            <span>5 months ago</span>
+                        </div>
+                        <a href="https://www.youtube.com/watch?v=5GSkgcPVF3M" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- My deepest prayer -->
+                <div class="video-card">
+                    
+                    <div class="video-info">
+                        <h4>My deepest prayer in spontaneous worship | Onjula Praise</h4>
+                        <div class="video-meta">
+                            <span class="video-views">6.1K views</span>
+                            <span>6 months ago</span>
+                        </div>
+                        <a href="https://www.youtube.com/watch?v=2j3A22X_alc" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Unscripted Worship Moments -->
+                <div class="video-card">
+                    
+                    <div class="video-info">
+                        <h4>Unscripted Worship Moments Holy Spirit Led with Onjula Praise</h4>
+                        <div class="video-meta">
+                            <span class="video-views">6.7K views</span>
+                            <span>6 months ago</span>
+                        </div>
+                        <a href="https://www.youtube.com/watch?v=9nG2ZHgzJuc" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- 30Min of Deep worship -->
+                <div class="video-card">
+                    
+                    <div class="video-info">
+                        <h4>30Min of Deep worship moment with Minister Onjula Praise</h4>
+                        <div class="video-meta">
+                            <span class="video-views">--</span>
+                            <span></span>
+                        </div>
+                        <a href="https://www.youtube.com/watch?v=lQtwM_Yd5uM" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="video-card">
+                    
+                    <div class="video-info">
+                        <h4>Ni Wewe By Onjula Praise Ft Abby Nyawira Official video</h4>
+                        <div class="video-meta">
+                            <span class="video-views">218K views</span>
+                            <span>4 months ago</span>
+                        </div>
+                        <a href="https://www.youtube.com/watch?v=HTT-yKs1KBU" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Ukae nami -->
+                <div class="video-card">
+                    
+                    <div class="video-info">
+                        <h4>Ukae nami || Deep prayer Worship moment with Minister Onjula Praise</h4>
+                        <div class="video-meta">
+                            <span class="video-views">21K views</span>
+                            <span>5 months ago</span>
+                        </div>
+                        <a href="https://www.youtube.com/watch?v=xUPxxspiB8M" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHOTO MOSAIC GALLERY (worship moments in images) -->
+        <div class="container photo-gallery-section">
+            <h2 style="text-align: center; margin-bottom: 40px;">glimpses of worship</h2>
+            <div class="photo-mosaic">
+                <div class="mosaic-item large">
+                    <img src="FRWG6515.JPG" alt="worship">
+                    <div class="mosaic-overlay">altar call · Nairobi</div>
+                </div>
+                <div class="mosaic-item">
+                    <img src="OMPT2191.JPG" alt="worship">
+                    <div class="mosaic-overlay">spontaneous worship</div>
+                </div>
+                <div class="mosaic-item">
+                    <img src="INGO6124.JPG" alt="prayer">
+                    <div class="mosaic-overlay">deep prayer moment</div>
+                </div>
+                <div class="mosaic-item medium">
+                    <img src="TCJL5716.JPG" alt="Onjula">
+                    <div class="mosaic-overlay">@HighstepTV session</div>
+                </div>
+                <div class="mosaic-item">
+                    <img src="FRWG6515.JPG" alt="choir">
+                    <div class="mosaic-overlay">with worship team</div>
+                </div>
+                <div class="mosaic-item">
+                    <img src="VCQP6671.JPG" alt="studio">
+                    <div class="mosaic-overlay">studio worship</div>
+                </div>
+                <div class="mosaic-item large">
+                    <img src="XIZT4944.JPG" alt="crusade">
+                    <div class="mosaic-overlay">open air crusade · 2025</div>
+                </div>
+                <div class="mosaic-item">
+                    <img src="OMPT2191.JPG" alt="choir">
+                    <div class="mosaic-overlay">with worship team</div>
+                </div><div class="mosaic-item">
+                    <img src="PQJQ9269.JPG" alt="choir">
+                    <div class="mosaic-overlay">with worship team</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WORSHIP HIGHLIGHTS (stats & testimony) -->
+        <div class="container worship-highlights">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center;">
+                <div>
+                    <i class="fas fa-eye" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <h3 style="margin: 10px 0;">530K+</h3>
+                    <p>total views on worship videos</p>
+                </div>
+                <div>
+                    <i class="fas fa-heart" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <h3 style="margin: 10px 0;">25K+</h3>
+                    <p>prayer requests received</p>
+                </div>
+                <div>
+                    <i class="fas fa-video" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <h3 style="margin: 10px 0;">45+</h3>
+                    <p>worship moments captured</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- INSTAGRAM FEED SIMULATION (more photos) -->
+        <div class="container" style="margin: 60px 0;">
+            <h2 style="text-align: center; margin-bottom: 20px;">from instagram</h2>
+            <div class="insta-feed">
+                <div class="insta-post">
+                    <img src="https://via.placeholder.com/400x400/d44c68/ffffff?text=Worship+1" alt="insta1">
+                    <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+                </div>
+                <div class="insta-post">
+                    <img src="https://via.placeholder.com/400x400/9d4edd/ffffff?text=Worship+2" alt="insta2">
+                    <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+                </div>
+                <div class="insta-post">
+                    <img src="https://via.placeholder.com/400x400/d44c68/ffffff?text=Worship+3" alt="insta3">
+                    <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px;"><a href="#" class="btn btn-outline"><i class="fab fa-instagram"></i> follow @onjulapraise</a></p>
+        </div>
+
+        <!-- YOUTUBE CHANNEL CTA -->
+        <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 60px; border-radius: 40px; margin: 60px auto; max-width: 900px; text-align: center; color: white;">
+            <i class="fab fa-youtube" style="font-size: 4rem; margin-bottom: 20px;"></i>
+            <h2 style="color: white;">subscribe for more worship moments</h2>
+            <p style="margin: 20px 0;">join the #WorshipWithOnjula family</p>
+            <a href="#" class="btn" style="background: white; color: var(--primary);">subscribe now</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Onjula Praise</h4>
+                    <p>Worship leader · Songwriter · Minister. Creating space for spontaneous worship.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>discover</h4>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">Story</a>
+                    <a href="sounds.html">Sounds</a>
+                    <a href="moments.html">Moments</a>
+                    <a href="contact.html">Connect</a>
+                </div>
+                <div class="footer-col">
+                    <h4>social</h4>
+                    <a href="#">YouTube</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">TikTok</a>
+                    <a href="#">Spotify</a>
+                </div>
+                <div class="footer-col">
+                    <h4>let's connect</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                    <p><i class="fas fa-envelope"></i> worship@onjulapraise.com</p>
+                    <p><i class="fas fa-phone"></i> +254 768 062 600</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-spotify"></i></a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Onjula Praise · All glory to God</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        // Mobile navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
+        });
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) { body.classList.add(currentTheme); updateIcon(); }
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark-mode' : '');
+            updateIcon();
+        });
+        function updateIcon() {
+            themeToggle.innerHTML = body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+        
+        // Header shadow - fixed
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow');
+            } else {
+                header.classList.remove('shadow');
+            }
+        });
+    </script>
+</body>
+</html>

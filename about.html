@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Onjula Praise · Queen of Seben</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- global styles (matching new index) ---------- */
+        :root {
+            --primary: #d44c68;
+            --primary-dark: #b03a52;
+            --secondary: #9d4edd;
+            --secondary-dark: #7b3bb0;
+            --text: #1e1e24;
+            --text-light: #5a5a6e;
+            --bg: #ffffff;
+            --bg-alt: #fdf3f5;
+            --card: #ffffff;
+            --border: #e9ecef;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.02);
+            --shadow-md: 0 12px 30px rgba(0,0,0,0.05);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .dark-mode {
+            --primary: #ff6b8b;
+            --secondary: #b185ff;
+            --text: #f2f0f0;
+            --text-light: #bebebe;
+            --bg: #1a1418;
+            --bg-alt: #2c1e26;
+            --card: #2a1f24;
+            --border: #3f2e38;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 34px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 40px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 20px rgba(212, 76, 104, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(212, 76, 104, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+        
+        /* header - exactly like index */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--bg);
+            backdrop-filter: blur(8px);
+            background-color: rgba(var(--bg-rgb), 0.8);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        
+        .logo-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .logo-name span {
+            color: var(--primary);
+            font-style: italic;
+        }
+        
+        .logo-sub {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links a.active {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.3rem;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* footer */
+        footer {
+            background-color: var(--bg-alt);
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient);
+        }
+        
+        .footer-col p, .footer-col a {
+            color: var(--text-light);
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: var(--card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+        
+        .social-link:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            background-color: #128C7E;
+        }
+
+        /* about page specific (preserved from original) */
+        .page-header {
+            padding: 140px 0 40px;
+            background-color: var(--bg-alt);
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .about-grid {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+        .about-grid > div {
+            flex: 1 1 300px;
+        }
+        .about-grid img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+        }
+        .bio-highlight {
+            font-size: 1.2rem;
+            font-style: italic;
+            border-left: 6px solid var(--primary);
+            padding-left: 25px;
+            margin: 30px 0;
+            color: var(--text-light);
+        }
+        .influences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+        .influence-card {
+            background-color: var(--card);
+            padding: 30px 20px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+        .influence-card i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .influence-card h4 {
+            margin-bottom: 10px;
+        }
+        .influence-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* dropdown timeline grid */
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .timeline-card {
+            background-color: var(--card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .timeline-header {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            background: linear-gradient(145deg, var(--bg), var(--bg-alt));
+        }
+        .timeline-header .year {
+            color: var(--primary);
+            font-family: 'Inter', monospace;
+            font-size: 1.1rem;
+        }
+        .timeline-header i {
+            transition: transform 0.3s;
+            color: var(--primary);
+        }
+        .timeline-content {
+            max-height: 0;
+            padding: 0 20px;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.3s;
+            background-color: var(--card);
+            color: var(--text-light);
+        }
+        .timeline-card.active .timeline-content {
+            max-height: 200px;
+            padding: 0 20px 20px 20px;
+        }
+        .timeline-card.active .timeline-header i {
+            transform: rotate(180deg);
+        }
+
+        /* studies section */
+        .studies-short {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+        .studies-short i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .studies-short p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 900px) {
+            .timeline-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: left 0.3s;
+                z-index: 999;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .footer-bottom {
+                flex-direction: column;
+            }
+            .about-grid {
+                flex-direction: column;
+            }
+            .timeline-grid {
+                grid-template-columns: 1fr;
+            }
+            nav > div:last-child {
+                gap: 15px;  /* Adjust this value to control the space */
+                display: flex;
+                align-items: center;
+            }
+
+            /* If the above doesn't work, a more specific selector: */
+            .theme-toggle + .hamburger {
+                margin-left: 15px;  /* Adds space specifically between the two icons */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - identical to index -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-guitar"></i>
+                    <div class="logo-text">
+                        <span class="logo-name">Onjula <span>Praise</span></span>
+                        <span class="logo-sub">QUEEN OF SEBEN</span>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="sounds.html">Sounds</a></li>
+                    <li><a href="moments.html">Moments</a></li>
+                    <li><a href="contact.html">Connect</a></li>
+                </ul>
+                <div style="display: flex; align-items: center;">
+                    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                    <div class="hamburger"><i class="fas fa-bars"></i></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="container">
+                <h1>Onjula's story</h1>
+                <p style="font-size:1.2rem; color: var(--text-light); margin-top: 10px;">the woman behind the rhythm</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- BIOGRAPHY SECTION with photo -->
+            <div class="about-grid">
+                <div>
+                    <img src="FRWG6515.JPG" alt="Onjula Praise">
+                </div>
+                <div>
+                    <h3 style="font-size: 2.2rem; margin-bottom: 15px;">Onjula Praise</h3>
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 15px;">Vocalist · songwriter · performer · cultural bearer</p>
+                    <p style="margin-bottom: 20px;">Born in the heart of Nairobi, Onjula Praise grew up surrounded by the sounds of Lingala rumba, Congolese seben and Kenyan benga. Her grandmother, a singer in a local band, was her first teacher – passing on melodies that would later define her career.</p>
+                    <p style="margin-bottom: 20px;">By her early teens, Onjula was already writing songs in Swahili, English and Sheng. She honed her craft in church choirs, school talent shows and the vibrant open-mic scene of Nairobi's Eastlands. It was there that she earned the nickname <strong>"Queen of Seben"</strong> – for her ability to ride the accelerating, hypnotic groove of the seben like no one else.</p>
+                    <div class="bio-highlight">
+                        “Seben is the conversation between the drum and the dancer. I just let my voice be part of that conversation.”
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHORT UNIVERSITY & STUDIES SECTION -->
+            <div class="studies-short">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>University & studies</h3>
+                <p>🎓 Diploma in Vocal Performance – Kenya Music Conservatory (xxxx–xxxx). <br> 
+                🌍 Participated in xxxxxxxxxx xxxxxxxxx (xxxxxxxxxx Jazz Masterclass, xxxxxxx xxxxxxx in Music residency). <br>
+                📚 Self-directed ethnomusicology research on seben rhythms, documenting oral histories from xxxxxxxxxxx and xxxxxxx xxxxxxx.</p>
+            </div>
+
+            <!-- DROPDOWN TIMELINE GRID: 3 per row, click to expand -->
+            <h3 style="text-align: center; margin: 60px 0 30px;">journey so far (click to expand)</h3>
+            <div class="timeline-grid">
+                <!-- card 1 -->
+                <div class="timeline-card">
+                    <div class="timeline-header" onclick="this.parentElement.classList.toggle('active')">
+                        <span class="year">XXX,XXX</span>
+                        <span>first single <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="timeline-content">
+                        <p><strong>"Msichana Wa Seben"</strong> – independent release, viral in Nairobi's underground, <strong>XXX,XXX</strong> streams in first month.</p>
+                    </div>
+                </div>
+                <!-- card 2 -->
+                <div class="timeline-card">
+                    <div class="timeline-header" onclick="this.parentElement.classList.toggle('active')">
+                        <span class="year">XXX,XXX</span>
+                        <span>collab <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="timeline-content">
+                        <p><strong>With Bensoul</strong> – "Nairobi Nights", first national radio play, reached <strong>XXX,XXX</strong> listeners.</p>
+                    </div>
+                </div>
+                <!-- card 3 -->
+                <div class="timeline-card">
+                    <div class="timeline-header" onclick="this.parentElement.classList.toggle('active')">
+                        <span class="year">XXX,XXX</span>
+                        <span>debut EP <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="timeline-content">
+                        <p><strong>"Moyo Wa Seben"</strong> – <strong>XXX,XXX</strong>+ streams, “Best New Act” (Kenyan music blog).</p>
+                    </div>
+                </div>
+                <!-- card 4 -->
+                <div class="timeline-card">
+                    <div class="timeline-header" onclick="this.parentElement.classList.toggle('active')">
+                        <span class="year">XXX,XXX</span>
+                        <span>Sauti za Busara <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="timeline-content">
+                        <p>Headlined Zanzibar festival, audience <strong>XXX,XXX</strong>. First major international appearance.</p>
+                    </div>
+                </div>
+                <!-- card 5 -->
+                <div class="timeline-card">
+                    <div class="timeline-header" onclick="this.parentElement.classList.toggle('active')">
+                        <span class="year">XXX,XXX</span>
+                        <span>"Suka" single <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="timeline-content">
+                        <p>Produced by Cedo, global playlists, <strong>XXX,XXX</strong>+ streams in 3 months.</p>
+                    </div>
+                </div>
+                <!-- card 6 -->
+                <div class="timeline-card">
+                    <div class="timeline-header" onclick="this.parentElement.classList.toggle('active')">
+                        <span class="year">XXX,XXX</span>
+                        <span>cultural envoy <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="timeline-content">
+                        <p>Appointed by Kenyan Ministry of Arts. Debut album in production with Pan‑African producers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INFLUENCES & VISION -->
+            <h3 style="text-align: center; margin: 70px 0 30px;">influences & vision</h3>
+            <div class="influences-grid">
+                <div class="influence-card">
+                    <i class="fas fa-microphone-alt"></i>
+                    <h4>Musical roots</h4>
+                    <p>Pépé Kallé, Mbilia Bel, Fela Kuti, Miriam Makeba – and the contemporary pulse of Sauti Sol and Burna Boy.</p>
+                </div>
+                <div class="influence-card">
+                    <i class="fas fa-feather-alt"></i>
+                    <h4>Message & lyrics</h4>
+                    <p>Her songs speak of love, resilience, African identity, and the power of women. Every track is a story.</p>
+                </div>
+                <div class="influence-card">
+                    <i class="fas fa-globe"></i>
+                    <h4>Global vision</h4>
+                    <p>She aims to bring seben to the world stage while preserving its authenticity. Upcoming collaborations with African and diaspora artists.</p>
+                </div>
+                <div class="influence-card">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h4>Community</h4>
+                    <p>Through free workshops in Nairobi, she teaches young singers the art of seben – ensuring the rhythm lives on.</p>
+                </div>
+            </div>
+
+            <!-- QUOTE / INVITE -->
+            <div style="text-align: center; background: var(--bg-alt); padding: 50px; border-radius: 30px; margin: 60px 0;">
+                <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--primary); opacity: 0.5;"></i>
+                <p style="font-size: 1.6rem; font-style: italic; max-width: 800px; margin: 20px auto;">I don't just sing – I carry the stories of my grandmother, my city, and every woman who dances to seben. That's a responsibility I hold with joy.</p>
+                <p style="font-weight: 600;">— Onjula Praise</p>
+                <a href="sounds.html" class="btn" style="margin-top: 30px;">listen to her sound</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer - matching index style -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Onjula Praise</h4>
+                    <p>Queen of Seben. Soulful vocals, electric stage presence. Redefining modern Afro‑music with the heartbeat of seben.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Discover</h4>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="sounds.html">Sounds</a>
+                    <a href="moments.html">Moments</a>
+                    <a href="contact.html">Connect</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Social</h4>
+                    <a href="#">YouTube</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">TikTok</a>
+                    <a href="#">Spotify</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>Nairobi, Kenya</p>
+                    <p>praise.onjula@sebenqueen.com</p>
+                    <p>+254 768 062 600</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-spotify"></i></a>
+                    <a href="https://www.youtube.com/@onjulapraise1" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; 2025 Onjula Praise · Queen of Seben
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="whatsapp-float" onclick="return false;"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        // Mobile navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            body.classList.add(currentTheme);
+            updateThemeIcon();
+        }
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark-mode' : '');
+            updateThemeIcon();
+        });
+        function updateThemeIcon() {
+            themeToggle.innerHTML = body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        // Header shadow
+        window.addEventListener('scroll', () => {
+            document.querySelector('header').classList.toggle('shadow', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>
