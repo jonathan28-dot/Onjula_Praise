@@ -64,7 +64,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -98,6 +98,26 @@
             background: var(--gradient);
             color: white;
             border-color: transparent;
+        }
+        
+        .btn-more {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .btn-more:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
         }
         
         /* header - exactly like index with proper shadow */
@@ -340,17 +360,18 @@
             background: var(--card);
             border-radius: 30px;
             padding: 30px;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
             border: 1px solid var(--border);
         }
         .hero-player {
             border-radius: 20px;
             overflow: hidden;
             background: #000;
+            aspect-ratio: 16/9;
         }
         .hero-player iframe {
             width: 100%;
-            height: 300px;
+            height: 100%;
             border: none;
         }
         .hero-info {
@@ -389,30 +410,33 @@
             font-weight: 400;
         }
 
-        /* video grid - 3 columns */
+        /* video grid - 5 columns for larger screens */
         .video-grid-section {
             margin: 60px 0;
         }
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
             margin-top: 30px;
+            margin-bottom: 30px;
         }
+        
+        /* Smaller video cards */
         .video-card {
             background: var(--card);
-            border-radius: 20px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--border);
             transition: transform 0.3s;
         }
         .video-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-4px);
         }
         .video-thumbnail {
             position: relative;
-            height: 200px;
+            height: 140px;
             overflow: hidden;
         }
         .video-thumbnail img {
@@ -441,28 +465,29 @@
             opacity: 1;
         }
         .play-overlay i {
-            font-size: 3rem;
+            font-size: 2rem;
             color: white;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         .video-info {
-            padding: 20px;
+            padding: 12px;
         }
         .video-info h4 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-        .video-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-light);
             font-size: 0.9rem;
-            margin-bottom: 10px;
+            margin-bottom: 4px;
+            line-height: 1.3;
+            font-weight: 500;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 2.4rem;
         }
-        .video-views {
-            font-weight: 600;
-            color: var(--primary);
+
+        .more-button-container {
+            text-align: center;
+            margin-top: 20px;
         }
 
         /* photo mosaic gallery */
@@ -560,6 +585,18 @@
             font-size: 2rem;
         }
 
+        @media (max-width: 1200px) {
+            .video-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .video-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
@@ -588,7 +625,7 @@
                 grid-template-columns: 1fr;
             }
             .video-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
             .photo-mosaic {
                 grid-template-columns: repeat(2, 1fr);
@@ -597,14 +634,19 @@
                 grid-template-columns: 1fr;
             }
             nav > div:last-child {
-                gap: 15px;  /* Adjust this value to control the space */
+                gap: 15px;
                 display: flex;
                 align-items: center;
             }
 
-            /* If the above doesn't work, a more specific selector: */
             .theme-toggle + .hamburger {
-                margin-left: 15px;  /* Adds space specifically between the two icons */
+                margin-left: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -623,7 +665,7 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="sounds.html">Sounds</a></li>
+                    <!-- <li><a href="sounds.html">Sounds</a></li> -->
                     <li><a href="team.html">Team</a></li>
                     <li><a href="moments.html" class="active">Moments</a></li>
                     <li><a href="contact.html">Connect</a></li>
@@ -639,7 +681,7 @@
     <main>
         <div class="page-header">
             <div class="container">
-                <h1>worship moments</h1>
+                <h1>Some moments</h1>
                 <p>spontaneous, unscripted, spirit-led encounters</p>
             </div>
         </div>
@@ -649,136 +691,35 @@
             <div class="hero-video-card">
                 <div class="hero-player">
                     <iframe 
-                        src="videoplayback (6).mp4" 
-                        title="Wi Museo Yesu"
+                        src="https://www.youtube.com/embed/s0TBXCAQC50" 
+                        title="WA AJABU - Onjula Praise"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                         allowfullscreen>
                     </iframe>
                 </div>
                 <div class="hero-info">
-                    <span class="badge"><i class="fas fa-crown"></i> most viewed worship</span>
-                    <h2>Wi Museo Yesu || Thanksgiving Spontaneous Worship Moment</h2>
-                    <p>with Min Onjula Praise @HighstepTV</p>
+                    <span class="badge"><i class="fas fa-crown"></i> most viewed </span>
+                    <h2>WA AJABU (Live Recording Official Video)</h2>
+                    <p>ONJULA PRAISE</p>
                     <div class="hero-stats">
-                        <div class="stat">40K+ <small>views</small></div>
-                        <div class="stat">xx <small>days ago</small></div>
+                        <div class="stat">1.6M+ <small>views</small></div>
+                        <!-- <div class="stat">9 <small>months ago</small></div> -->
                     </div>
-                    <a href="#" class="btn" style="margin-top: 15px; width: fit-content;"><i class="fab fa-youtube"></i> watch full video</a>
+                    <a href="https://www.youtube.com/watch?v=s0TBXCAQC50" target="_blank" class="btn" style="margin-top: 15px; width: fit-content;"><i class="fab fa-youtube"></i> watch full video</a>
                 </div>
             </div>
         </div>
 
-        <!-- VIDEO GRID (all worship moments) -->
+        <!-- VIDEO GRID (all worship moments with show more) -->
         <div class="container video-grid-section">
-            <h2 style="text-align: center; margin-bottom: 40px;">recent worship moments</h2>
-            <div class="video-grid">
-                <!-- Ni Wewe -->
-                <div class="video-card">
-                    
-                    <div class="video-info">
-                        <h4>Ni Wewe By Onjula Praise Ft Abby Nyawira Official video</h4>
-                        <div class="video-meta">
-                            <span class="video-views">218K views</span>
-                            <span>4 months ago</span>
-                        </div>
-                        <a href="https://www.youtube.com/watch?v=HTT-yKs1KBU" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <!-- Ukae nami -->
-                <div class="video-card">
-                    
-                    <div class="video-info">
-                        <h4>Ukae nami || Deep prayer Worship moment with Minister Onjula Praise</h4>
-                        <div class="video-meta">
-                            <span class="video-views">21K views</span>
-                            <span>5 months ago</span>
-                        </div>
-                        <a href="https://www.youtube.com/watch?v=xUPxxspiB8M" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <!-- Moyo wangu -->
-                <div class="video-card">
-                    
-                    <div class="video-info">
-                        <h4>Moyo wangu usilie tena | Majina yote mazuri || Deep spontaneous worship moment</h4>
-                        <div class="video-meta">
-                            <span class="video-views">42K views</span>
-                            <span>5 months ago</span>
-                        </div>
-                        <a href="https://www.youtube.com/watch?v=LNw3BYBgMjQ&pp=0gcJCYcKAYcqIYzv" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <!-- In His presence -->
-                <div class="video-card">
-                    
-                    <div class="video-info">
-                        <h4>In His presence Unscripted worship moments wit Onjula Praise</h4>
-                        <div class="video-meta">
-                            <span class="video-views">7K views</span>
-                            <span>5 months ago</span>
-                        </div>
-                        <a href="https://www.youtube.com/watch?v=5GSkgcPVF3M" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <!-- My deepest prayer -->
-                <div class="video-card">
-                    
-                    <div class="video-info">
-                        <h4>My deepest prayer in spontaneous worship | Onjula Praise</h4>
-                        <div class="video-meta">
-                            <span class="video-views">6.1K views</span>
-                            <span>6 months ago</span>
-                        </div>
-                        <a href="https://www.youtube.com/watch?v=2j3A22X_alc" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <!-- Unscripted Worship Moments -->
-                <div class="video-card">
-                    
-                    <div class="video-info">
-                        <h4>Unscripted Worship Moments Holy Spirit Led with Onjula Praise</h4>
-                        <div class="video-meta">
-                            <span class="video-views">6.7K views</span>
-                            <span>6 months ago</span>
-                        </div>
-                        <a href="https://www.youtube.com/watch?v=9nG2ZHgzJuc" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <!-- 30Min of Deep worship -->
-                <div class="video-card">
-                    
-                    <div class="video-info">
-                        <h4>30Min of Deep worship moment with Minister Onjula Praise</h4>
-                        <div class="video-meta">
-                            <span class="video-views">--</span>
-                            <span></span>
-                        </div>
-                        <a href="https://www.youtube.com/watch?v=lQtwM_Yd5uM" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="video-card">
-                    
-                    <div class="video-info">
-                        <h4>Ni Wewe By Onjula Praise Ft Abby Nyawira Official video</h4>
-                        <div class="video-meta">
-                            <span class="video-views">218K views</span>
-                            <span>4 months ago</span>
-                        </div>
-                        <a href="https://www.youtube.com/watch?v=HTT-yKs1KBU" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <!-- Ukae nami -->
-                <div class="video-card">
-                    
-                    <div class="video-info">
-                        <h4>Ukae nami || Deep prayer Worship moment with Minister Onjula Praise</h4>
-                        <div class="video-meta">
-                            <span class="video-views">21K views</span>
-                            <span>5 months ago</span>
-                        </div>
-                        <a href="https://www.youtube.com/watch?v=xUPxxspiB8M" style="font-size: 0.9rem;">watch on youtube <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
+            <h2 style="text-align: center; margin-bottom: 40px;">more moments</h2>
+            <div class="video-grid" id="videoGrid">
+                <!-- videos will be populated by JavaScript -->
+            </div>
+            <div class="more-button-container" id="moreButtonContainer">
+                <button class="btn-more" id="showMoreBtn" onclick="loadMoreVideos()">
+                    <i class="fas fa-chevron-down" style="margin-right: 8px;"></i> show more videos
+                </button>
             </div>
         </div>
 
@@ -839,7 +780,7 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center;">
                 <div>
                     <i class="fas fa-eye" style="font-size: 2.5rem; color: var(--primary);"></i>
-                    <h3 style="margin: 10px 0;">530K+</h3>
+                    <h3 style="margin: 10px 0;">2.5M+</h3>
                     <p>total views on worship videos</p>
                 </div>
                 <div>
@@ -849,7 +790,7 @@
                 </div>
                 <div>
                     <i class="fas fa-video" style="font-size: 2.5rem; color: var(--primary);"></i>
-                    <h3 style="margin: 10px 0;">45+</h3>
+                    <h3 style="margin: 10px 0;" id="videoCount">20+</h3>
                     <p>worship moments captured</p>
                 </div>
             </div>
@@ -895,7 +836,7 @@
                     <h4>discover</h4>
                     <a href="index.html">Home</a>
                     <a href="about.html">Story</a>
-                    <a href="sounds.html">Sounds</a>
+                    <!-- <a href="sounds.html">Sounds</a> -->
                     <a href="moments.html">Moments</a>
                     <a href="contact.html">Connect</a>
                 </div>
@@ -905,7 +846,7 @@
                     <a href="https://www.instagram.com/_onjula.praise?igsh=d3Q3bGp3M2ZpeW5r">Instagram</a>
                     <a href="https://www.tiktok.com/@onjulapraise1?_t=ZM-8uOmEDLihZF&_r=1">TikTok</a>
                     <a href="https://open.spotify.com/artist/5762y6kIWu61kE5PGm6ocg?si=X8LWVAgQQLGK5J3rDKtFig&nd=1&utm_medium=organic&_branch_referrer=H4sIAAAAAAAAA72N0QqCMBiFn2ZeKmquCCSiMsou8ia7k7nmHM5t%2FNuIbnr2NOgVgnNxOB8fp3fO2HUUWaOd6F4hMSaUQg3RxoB%2BeOpybZgKULLovJSNB5n3s4LSLUqKKTMOfzbV4zQRcMK6qWRLnLzwcKo9jodDdj2OWFOO0sIKlO7vq0t92%2FKquhzL7JzCvnSF4N8rImVL6PCHO5Rg9ZhoHHSMOA8s18CJEjR4A%2BsYgFC8aUE%2FLYN814Me2Qcx5MFiMwEAAA%3D%3D&product=open&%24full_url=https%3A%2F%2Fopen.spotify.com%2Fartist%2F5762y6kIWu61kE5PGm6ocg%3Fsi%3DX8LWVAgQQLGK5J3rDKtFig&feature=organic&_branch_match_id=1497671040941597499">Spotify</a>
-                    <a href="https://www.facebook.com/@toto.onjula/?hr=1&wtsid=rdr_0iP1CMgigYmwPnGuU">Facebook</a>
+                    <!-- <a href="https://www.facebook.com/@toto.onjula/?hr=1&wtsid=rdr_0iP1CMgigYmwPnGuU">Facebook</a> -->
                 </div>
                 <div class="footer-col">
                     <h4>let's connect</h4>
@@ -923,7 +864,7 @@
                     <a href="https://www.facebook.com/@toto.onjula/?hr=1&wtsid=rdr_0iP1CMgigYmwPnGuU" class="social-link"><i class="fab fa-facebook"></i></a>
                 </div>
                 <div class="copyright">
-                    &copy; 2025 Onjula Praise · Queen of Seben
+                    &copy; 2026 Onjula Praise · Queen of Seben
                 </div>
             </div>
         </div>
@@ -961,6 +902,195 @@
                 header.classList.add('shadow');
             } else {
                 header.classList.remove('shadow');
+            }
+        });
+
+        // YouTube video data - add your video links here
+        const videos = [
+            {
+                title: "Ni Wewe By Onjula Praise Ft Abby Nyawira Official video",
+                link: "https://www.youtube.com/watch?v=HTT-yKs1KBU"
+            },
+            {
+                title: "Ukae nami || Deep prayer Worship moment with Minister Onjula Praise",
+                link: "https://www.youtube.com/watch?v=xUPxxspiB8M"
+            },
+            {
+                title: "Moyo wangu usilie tena | Majina yote mazuri || Deep spontaneous worship moment",
+                link: "https://www.youtube.com/watch?v=LNw3BYBgMjQ"
+            },
+            {
+                title: "In His presence Unscripted worship moments wit Onjula Praise",
+                link: "https://www.youtube.com/watch?v=5GSkgcPVF3M"
+            },
+            {
+                title: "My deepest prayer in spontaneous worship | Onjula Praise",
+                link: "https://www.youtube.com/watch?v=2j3A22X_alc"
+            },
+            {
+                title: "Unscripted Worship Moments Holy Spirit Led with Onjula Praise",
+                link: "https://www.youtube.com/watch?v=9nG2ZHgzJuc"
+            },
+            {
+                title: "30Min of Deep worship moment with Minister Onjula Praise",
+                link: "https://www.youtube.com/watch?v=lQtwM_Yd5uM"
+            },
+            {
+                title: "UPLIFTING WORSHIP MOMENT Minister Onjula Praise",
+                link: "https://www.youtube.com/watch?v=UKtM_J2G9Pw"
+            },
+            {
+                title: "Mfalme Mwema | Onjula Praise ft Grace Onjula",
+                link: "https://www.youtube.com/watch?v=mhsT5RJ72ls"
+            },
+            {
+                title: "ONJULA PRAISE Spontaneous worship moment",
+                link: "https://www.youtube.com/watch?v=srgKNHaWWYw"
+            },
+            {
+                title: "WA AJABU (Live Recording Official Video)- ONJULA PRAISE",
+                link: "https://www.youtube.com/watch?v=s0TBXCAQC50"
+            },
+            {
+                title: "Overflowing Worship With Onjula Praise || Ni nani kama wewe Bwana|| Sijaona Mungu kama wewe ||",
+                link: "https://www.youtube.com/watch?v=RVMX0fHmQxs"
+            },
+            {
+                title: "Spontaneous worship moment || Onjula Praise #Worship2025",
+                link: "https://www.youtube.com/watch?v=5uZRB-9Usok"
+            },
+            {
+                title: "AMEZALIWA Christmas Song by Onjula Praise (VOP)",
+                link: "https://www.youtube.com/watch?v=z_9fyjAgqck"
+            },
+            {
+                title: "Onjula Praise A wakening Spontaneous worship moment @High step tv",
+                link: "https://www.youtube.com/watch?v=e0LTcfo8n4A"
+            },
+            {
+                title: "Onjula Praise || Worship with me, as I cover this powerful songs. Courtesy of #WORSHIPALONG",
+                link: "https://www.youtube.com/watch?v=o2FDA0fUsPg"
+            },
+            {
+                title: "Worship moment with Minister Onjula Praise",
+                link: "https://www.youtube.com/watch?v=bkY_744c_QA"
+            },
+            {
+                title: "Onjula Praise || WORSHIP ALONG WITH ME🙌, as I cover this beautiful songs ❤",
+                link: "https://www.youtube.com/watch?v=QeeoRjxSC8c"
+            },
+            {
+                title: "KWAKU BY ONJULA PRAISE",
+                link: "https://www.youtube.com/watch?v=Tf3px1jdSvU"
+            },
+            {
+                title: "NACHOTAKA COVER OFFICIAL LYRICAL VIDEO BY ONJULA PRAISE UNDER THE SOUND PRESIDENT INSIDE IPS",
+                link: "https://www.youtube.com/watch?v=TtSayFRvnfQ"
+            }
+        ];
+
+        // Update video count
+        document.getElementById('videoCount').textContent = videos.length + '+';
+
+        // Function to extract YouTube video ID from various URL formats
+        function getYouTubeVideoId(url) {
+            if (url === "#" || !url) return null;
+            
+            const patterns = [
+                /(?:youtube\.com\/watch\?v=)([^&]+)/,
+                /(?:youtu\.be\/)([^?]+)/,
+                /(?:youtube\.com\/embed\/)([^?]+)/
+            ];
+            
+            for (let pattern of patterns) {
+                const match = url.match(pattern);
+                if (match) return match[1];
+            }
+            return null;
+        }
+
+        // Function to get thumbnail URL from video ID
+        function getThumbnailUrl(videoId) {
+            return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        }
+
+        // Function to create video card HTML (without views and date)
+        function createVideoCard(video) {
+            const videoId = getYouTubeVideoId(video.link);
+            const thumbnailUrl = videoId ? getThumbnailUrl(videoId) : 'https://via.placeholder.com/640x360.png?text=No+Thumbnail';
+            const watchLink = video.link !== "#" ? video.link : "#";
+            
+            return `
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="${thumbnailUrl}" 
+                             alt="${video.title.replace(/"/g, '&quot;')}"
+                             onerror="this.src='https://via.placeholder.com/640x360.png?text=Worship+Moment'">
+                        <a href="${watchLink}" target="_blank" class="play-overlay">
+                            <i class="fas fa-play-circle"></i>
+                        </a>
+                    </div>
+                    <div class="video-info">
+                        <h4>${video.title}</h4>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Pagination variables
+        let currentIndex = 0;
+        let desktopBatchSize = 10; // Show 10 videos initially on desktop (2 rows of 5)
+        let mobileBatchSize = 4; // Show 4 videos initially on mobile
+        let currentBatchSize = window.innerWidth <= 768 ? mobileBatchSize : desktopBatchSize;
+
+        // Function to load more videos
+        window.loadMoreVideos = function() {
+            const videoGrid = document.getElementById('videoGrid');
+            const nextBatch = currentBatchSize;
+            const newIndex = Math.min(currentIndex + nextBatch, videos.length);
+            
+            for (let i = currentIndex; i < newIndex; i++) {
+                videoGrid.insertAdjacentHTML('beforeend', createVideoCard(videos[i]));
+            }
+            
+            currentIndex = newIndex;
+            
+            // Hide button if no more videos
+            if (currentIndex >= videos.length) {
+                document.getElementById('moreButtonContainer').style.display = 'none';
+            }
+            
+            // Update batch size based on screen size for next load
+            currentBatchSize = window.innerWidth <= 768 ? mobileBatchSize : desktopBatchSize;
+        };
+
+        // Initial load
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoGrid = document.getElementById('videoGrid');
+            
+            // Determine initial batch size based on screen width
+            const initialBatch = window.innerWidth <= 768 ? mobileBatchSize : desktopBatchSize;
+            currentIndex = Math.min(initialBatch, videos.length);
+            
+            // Load initial videos
+            for (let i = 0; i < currentIndex; i++) {
+                videoGrid.insertAdjacentHTML('beforeend', createVideoCard(videos[i]));
+            }
+            
+            // Hide button if all videos are shown
+            if (currentIndex >= videos.length) {
+                document.getElementById('moreButtonContainer').style.display = 'none';
+            }
+        });
+
+        // Update batch size on window resize
+        window.addEventListener('resize', function() {
+            const wasMobile = currentBatchSize === mobileBatchSize;
+            const isMobile = window.innerWidth <= 768;
+            
+            // Only update if screen size category changed
+            if (wasMobile !== isMobile) {
+                currentBatchSize = isMobile ? mobileBatchSize : desktopBatchSize;
             }
         });
     </script>
